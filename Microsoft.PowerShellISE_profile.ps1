@@ -25,3 +25,9 @@ Pop-Location
 Start-SshAgent -Quiet
 import-module phatgit
  Set-Location -Path $env:userprofile
+
+ function Delete-MergedBranches ($Commit = 'HEAD', [switch]$Force) {
+    git branch --merged $Commit |
+        ? { $_ -notmatch '(^\*)|(^. master$)' } |
+        % { git branch $(if($Force) { '-D' } else { "-d" }) $_.Substring(2) }
+}
