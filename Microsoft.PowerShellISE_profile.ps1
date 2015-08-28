@@ -23,4 +23,5 @@ function global:prompt {
 Pop-Location
 
 Start-SshAgent -Quiet
-Set-Location -Path $env:userprofile
+import-module phatgit
+ Set-Location -Path $env:userprofile
